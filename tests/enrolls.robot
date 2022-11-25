@@ -7,21 +7,17 @@ Resource        ../resources/base.resource
 ***Test Cases***
 Deve matricular um aluno
 
-    # Falcão Não mexer
-    # Smart
-    # 11/10/2022
+    ${admin}        Get Fixtures        admin
 
-    ${admin}    Create Dictionary
-    ...         name=Admin
-    ...         email=admin@smartbit.com
-    ...         pass=qacademy
+    ${student}      Get Fixtures        student
 
+    Reset Student Enroll  ${student}[email]
     Do Login    ${admin}
 
     Go To Enrolls
     Go To Enroll Form
-    Select Student      Falcão
-    Select Plan         Smart
+    Select Student      ${student}[name]
+    Select Plan         ${student}[enroll][plan]
     Fill Start Date     
-
-    Sleep       2
+    Submit Enroll Form
+    Verify Toaster  Matrícula cadastrada com sucesso
