@@ -17,6 +17,6 @@ Deve abrir o app da Smartbit
     ...                    autoGrantPermissions=true
 
 
-    Sleep    10
+    Sleep    5
 
     Close Application
