@@ -1,10 +1,12 @@
 *** Settings ***
-Documentation            Suíte de testes de perdido de ajuda
+Documentation       Suíte de testes de perdido de ajuda
 
-Resource        ../resources/base.resource
+Resource            ../resources/base.resource
+Resource            ../resources/services/enrolls.resource
 
-# Test Setup           Start App
-# Test Teardown        Finish App
+Test Setup          Start App
+Test Teardown       Finish App
+
 
 *** Test Cases ***
 Deve poder solicitar ajuda
@@ -13,5 +15,12 @@ Deve poder solicitar ajuda
 
     Reset Student    ${papito}[student][email]
 
-    ${token}        Get Service Token        ${admin}
-    POST New Student    ${token}             ${papito}[student]
+    ${token}    Get Service Token    ${admin}
+    ${student_id}    POST New Student    ${token}    ${papito}[student]
+    POST New Enroll    ${token}    ${student_id}
+
+    Login With Student id    ${student_id}
+    Confirm Popup
+    Go To Help Order
+    Submit Help Order    ${papito}[help]
+    Wait Until Page Contains    Recebemos a sua dúvida. Agora é só aguardar até 24 horas para receber o nosso feedback.
