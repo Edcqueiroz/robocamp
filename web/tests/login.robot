@@ -4,6 +4,9 @@ Documentation       Suite de testes de autenticação
 
 Resource        ../resources/base.resource
 
+
+Test Teardown        Take Screenshot
+
 ***Test Cases***
 Login do Administrador
     Go to Login Page
