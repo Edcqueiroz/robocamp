@@ -3,7 +3,6 @@ Documentation       Suite de testes de recebimento de pedido de ajuda
 
 Resource            ../resources/base.resource
 
-Test Teardown        Take Screenshot
 
 *** Test Cases ***
 Deve receber uma notificação de pedido de ajuda
@@ -31,4 +30,29 @@ Deve receber uma notificação de pedido de ajuda
     Open Notifications
     Notification Should Be    ${joao}[question]
 
-    Take Screenshot
+
+Deve poder responder um pedido de ajuda
+
+
+# Dado que abri um novo pedido de ajuda
+    ${admin}    Get Fixture    admin
+    ${edu}    Get Fixture    edu
+    
+    Reset Student    ${edu}[student][email]
+
+    ${token}    Get Service Token    ${admin}
+    ${student_id}    POST New Student    ${token}    ${edu}[student]
+
+    POST Question    ${student_id}    ${edu}[question]
+
+# Quando respondo esse pedido
+
+    Do Login    ${admin}
+    Open Notifications
+    # Preferi deixar a mensagem "Coma ovo!" hardcoded do que adicionar dentro da fixture de admin uma resposta
+    Answer Notification    ${edu}[question]    Coma ovo!
+    Submit Answer
+    
+# Então devo ver uma mensagem de sucesso
+
+    Verify Toaster    Resposta enviada com sucesso

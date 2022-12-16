@@ -1,0 +1,13 @@
+{
+    "student": {
+        "feet_tall": 1.76,
+        "weight": 80,
+        "age": 22,
+        "email": "edcqueiroz@ig.com",
+        "name": "Eduardo Queiroz"
+    },
+    "enroll": {
+        "plan": "Smart"
+    },
+    "question":"Como faço para perder massa muscular?"
+}
