@@ -13,22 +13,12 @@ Notification Should Be
 
     ${element}        Set Variable        xpath=//div/p[contains(text(),'${text}')]
 
-    Wait For Elements State    ${element}
-    ...                        visible
-    ...                    timeout=2
-
     Get Text    ${element}        equal        ${text} 
-
-
 
 Answer Notification 
     [Arguments]        ${text}    ${answer}
 
     ${element}        Set Variable        xpath=//div/p[contains(text(),'${text}')]
-
-    Wait For Elements State    ${element}
-    ...                        visible
-    ...                    timeout=2
 
     Click    ${element}
     Fill Text       css=textarea[name='answer']        ${answer}               
